@@ -2,16 +2,17 @@ package com.stacydevino.videoplayertypes
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_videoview.*
 import android.widget.MediaController
+import java.util.concurrent.TimeUnit
 
 
 class VideoViewActivity : AppCompatActivity() {
 
     companion object {
-        @JvmField
-        val ARG_VIDEO_URL = "VideoView.URL"
+        const val ARG_VIDEO_URL = "VideoView.URL"
     }
 
     private lateinit var videoUrl: String
@@ -31,6 +32,12 @@ class VideoViewActivity : AppCompatActivity() {
         val mediaController = MediaController(this)
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
+
+        // If the video doesn't fill the screen (which it probably won't), allow touching elsewhere
+        // to bring up the controller.
+        findViewById<View>(R.id.rootView).setOnClickListener {
+            mediaController.show(TimeUnit.SECONDS.toMillis(5).toInt())
+        }
     }
 
     override fun onPause() {

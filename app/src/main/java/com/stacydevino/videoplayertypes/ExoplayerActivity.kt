@@ -24,10 +24,9 @@ import kotlinx.android.synthetic.main.exoplayer_media_controls_custom.exo_fullsc
 class ExoplayerActivity : AppCompatActivity() {
 
   companion object {
-    @JvmField
-    val ARG_VIDEO_URL = "ExoplayerActivity.URL"
-    val ARG_VIDEO_POSITION = "ExoplayerActivity.POSITION"
-    val ARG_VIDEO_URL_LIST = "ExoplayerActivity.URL_LIST"
+    const val ARG_VIDEO_URL = "ExoplayerActivity.URL"
+    const val ARG_VIDEO_POSITION = "ExoplayerActivity.POSITION"
+    const val ARG_VIDEO_URL_LIST = "ExoplayerActivity.URL_LIST"
   }
 
   private var videoUrl: String? = null
@@ -47,7 +46,7 @@ class ExoplayerActivity : AppCompatActivity() {
     videoUrl = intent.getStringExtra(ARG_VIDEO_URL)
     videoUrlList = intent.getStringArrayExtra(ARG_VIDEO_URL_LIST)
 
-    savedInstanceState?.let { videoPosition = savedInstanceState.getLong(ARG_VIDEO_POSITION) }
+    savedInstanceState?.run { videoPosition = getLong(ARG_VIDEO_POSITION) }
 
     /* Adding a custom Layout with Button!
     setFullscreenBtnImage(getOrientation())
